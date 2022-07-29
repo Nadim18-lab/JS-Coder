@@ -1,23 +1,34 @@
+let array_localStorage =[]
 
-function mostrarAvance(){
-    alert("Proximamente!")
+let lista_de_paises;
+
+//traerlocalStorage
+function getLocalStorage(){
+        array_localStorage = JSON.parse(localStorage.getItem("pais")) || []
 }
 
-let lista_de_paises= [
-    
-]
+getLocalStorage()
+
+// guardarLocalStorage
+function saveInLocalStorage(paises){
+    localStorage.setItem("pais",JSON.stringify(paises))
+}
+
 
 function agregarClima(pais_nombre,horario,clima_pais,coordenadas_pais){
 
-    let lista_de_paises2=
-        {
-            nombre_pais: pais_nombre,
-            carga_horaria:horario,
-            clima: clima_pais,
-            coordenadas: coordenadas_pais,
-        }
+    let pais = {
+        nombre_pais: pais_nombre,
+        carga_horaria:horario,
+        clima: clima_pais,
+        coordenadas: coordenadas_pais
+    }
+    
+    
+    array_localStorage.push(pais)
+    
+    saveInLocalStorage(array_localStorage)
 
-    return lista_de_paises2;
 }
 
 let agregarC= document.querySelector("#agregar")
@@ -29,12 +40,9 @@ agregarC.addEventListener("click",()=>{
         let clima_pais = prompt("¿Cual es el clima actual del pais?(Ingresar con Cº)")
         let coordenadas_pais = prompt("¿Cuales son las coordenadas del pais?(ir a google maps y copiar con click derecho hacia el pais)")
     
-        lista_de_paises.push(agregarClima(pais_nombre,horario,clima_pais,coordenadas_pais))
+        agregarClima(pais_nombre,horario,clima_pais,coordenadas_pais)
         alert("se ha agregado el pais correctamente")
-        cartasulis();
         
-        return lista_de_paises;
-    
 })
 
 
@@ -57,7 +65,7 @@ buscarNO.addEventListener("click",() =>{
         let pais_encontrado = lista_de_paises.find(pais => nombre_cambiado === pais.nombre_pais.toLowerCase())
     
         if (pais_encontrado == undefined) {
-            console.log("NO se ha encontrado el pais en el array :( ")
+            alert("NO se ha encontrado el pais en el array :( ")
         }else{
             console.log("Se ha encontrado el pais: ",pais_encontrado.nombre_pais)
         }
@@ -66,14 +74,20 @@ buscarNO.addEventListener("click",() =>{
 
 
 
-let container= document.querySelector(".carta")
 
-function cartasulis() {
+
+let container= document.getElementById("carta")
+
+   
+array_localStorage.forEach(pais => {
     let card = document.createElement("div")
-    card.classList.add("card")
-    lista_de_paises.forEach(pais => {
-        card.innerHTML = 
-    `<div class="card-body">
+    card.classList = 'card';
+
+    console.log(array_localStorage)
+        console.log(pais);
+         const texto_html= 
+        `<div class="cartasuli">
+        <div class="card">
       <h5 class="card-title">${pais.nombre_pais}</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
@@ -81,9 +95,11 @@ function cartasulis() {
       <li class="list-group-item">${pais.carga_horaria}</li>
       <li class="list-group-item">${pais.clima}</li>
       <li class="list-group-item">${pais.coordenadas}</li>
-    </ul>`
+    </ul>
+    </div>`
+    container.innerHTML += texto_html;
     });
-    container.appendChild(card)
-    
-}
+
+
+
 

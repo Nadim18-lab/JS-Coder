@@ -28,14 +28,23 @@ body {
 
 .carta{
   display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  align-items: center;
   justify-content: center;
-  
   background-color: #333;
 }
 
+.cartasuli{
+  max-width: 300px;
+  margin-right: 44px;
+  margin-bottom: 30px;
+  width: 30%;
+}
+
 .card{
+  
   background-color:lightsteelblue;
-  width: 18rem;
 }
 
 .card li{
