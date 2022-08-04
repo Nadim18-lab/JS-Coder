@@ -21,8 +21,7 @@
           <h3 class="float-md-start mb-0">ClimaJS</h3>
           <nav class="nav nav-masthead justify-content-center float-md-end">
             <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="" >Home</a>
-            <a class="nav-link fw-bold py-1 px-0" id="horarios">Schedule</a>
-            <a class="nav-link fw-bold py-1 px-0" id="agregar">Add City</a>
+            
           </nav>
         </div>
       </header>
@@ -30,9 +29,9 @@
       <main class="px-3">
         <h1>ClimaJS</h1>
         <p class="lead">Voy a hacer una pagina en donde a travez de una api podras seleccionar el pais que quieras y va  atraer ademas del horario, el clima que hace el mismo dia y posteriores</p>
-        <p>(apreta F12 para saber los paises que estan ingresados y seran mostrados en pantalla proximamente!)</p>
+        <p>(ahora en vez de mostrar muchos paises , se va a mostrar uno solo pero a eleccion del usuario)</p>
         <p class="lead">
-          <a href="" class="btn btn-lg btn-secondary fw-bold border-white bg-white" onclick="mostrarAvance()">Conocer el clima de Argentina</a>
+          <a class="btn btn-lg btn-secondary fw-bold border-white bg-white" id="agregar">Conocer el clima de los Paises Ingresados</a>
         </p>
       </main>
     
@@ -42,12 +41,14 @@
     <!-- <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <img class="card-icon" id="icono-animado" src="" alt="" height="128" width="128">
+        <div class="" id="climaDescripcion">
+        </div>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
+        <li class="list-group-item horaDescripcion">Dapibus ac facilisis in</li>
+        <li class="list-group-item weathDescripcion">Dapibus ac facilisis in</li>
+        <li class="list-group-item climaDescripcion">Vestibulum at eros</li>
       </ul>
       
     </div> -->
@@ -55,7 +56,6 @@
   
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script src="luxon.js"></script> -->
     <script src="../js/index.js"></script>
     </body>
 </html>

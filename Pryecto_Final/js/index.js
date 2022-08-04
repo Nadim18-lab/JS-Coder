@@ -1,3 +1,12 @@
+//API
+let container= document.getElementById("carta")
+let nombrePaisHtml = document.querySelector(".card-title")
+let tempPaisHtml = document.querySelector(".weathDescripcion")
+let weathPaisHtml = document.querySelector(".climaDescripcion")
+let horaPaisHtml = document.querySelector(".horaDescripcion")
+
+// let climaAnimado = document.getElementById('icono-animado')
+
 let array_localStorage =[]
 
 let lista_de_paises;
@@ -9,128 +18,190 @@ function getLocalStorage(){
 
 getLocalStorage()
 
-// guardarLocalStorage
-function saveInLocalStorage(paises){
-    localStorage.setItem("pais",JSON.stringify(paises))
-}
-
-
-function agregarClima(pais_nombre,horario,clima_pais,coordenadas_pais){
-
-    let pais = {
-        nombre_pais: pais_nombre,
-        carga_horaria:horario,
-        clima: clima_pais,
-        coordenadas: coordenadas_pais
-    }
-    
-    
-    array_localStorage.push(pais)
-    
-    saveInLocalStorage(array_localStorage)
-    
-}
 
 let agregarC= document.querySelector("#agregar")
 
 agregarC.addEventListener("click",async()=>{
   let horario = new Date();
   let horario2;
-  let pais_nombre = await Swal.fire({
+  let hh= 'PM';
+  let horario3;
+   pais_nombre = await Swal.fire({
     icon:'question',
     title: '¿Cual es el nombre del pais?',
     input: 'select',
     inputOptions:{
       'Europa':{
-        Ukraine:'Ukraine',
-        Spain:'Spain',
-        France:'France',
-        Italy:'Italy',
-        Germany:'Germany',
-        Portugal:'Portugal',
-        Swiss:'Swiss',
-        UnitedKingdom:'United Kingdom',
-        Russia:'Russia',
-        Poland:'Poland',
+        690791:'Ukraina',
+        3117735:'España',
+        2968815:'Francia',
+        3168222:'Italia',
+        2885657:'Alemania',
+        2267056:'Portugal',
+        2660512:'Suiza',
+        3333169:'Reino Unido',
+        524901:'Rusia',
+        798544:'Polonia',
       },
       'America Norte':{
-        UnitedStates:'United States',
-        Canada:'Canada',
-        Mexico:'Mexico',
+        4903565:'Estados Unidos',
+        6087824:'Canada',
+        3530597:'Mexico',
       },
       'America Sur':{
-        Argentina:'Argentina',
-        Peru:'Peru',
-        Chile:'Chile',
-        Brasil:'Brasil',
-        Uruguay:'Uruguay',
-        Bolivia:'Bolivia',
-        Colombia:'Colombia',
-        Ecuador:'Ecuador',
-        Venezuela:'Venezuela',
+        3435910:'Argentina',
+        3941584:'Peru',
+        3895114:'Chile',
+        3472339:'Brasil',
+        3441575:'Uruguay',
+        3911925:'Bolivia',
+        3688689:'Colombia',
+        3652462:'Ecuador',
+        3646738:'Venezuela',
       }
     },
     inputLabel: '',
     inputPlaceholder: 'Ingrese el nombre del pais',
     showCancelButton: true,
     inputValidator: (pais_nombre) =>{
-        if (pais_nombre == 'Ukraine' || pais_nombre=='Spain'|| pais_nombre=='France'|| pais_nombre=='Italy'|| pais_nombre=='Germany'|| pais_nombre=='Portugal'|| pais_nombre=='Swiss'|| pais_nombre=='United Kingdom'|| pais_nombre=='Russia'|| pais_nombre=='Poland'){
+
+        if (pais_nombre == 690791 || pais_nombre==3117735|| pais_nombre==2968815|| pais_nombre==3168222|| pais_nombre==2885657|| pais_nombre==2267056|| pais_nombre==2660512|| pais_nombre==3333169|| pais_nombre==524901|| pais_nombre==798544){
+
+          console.log(horario.getHours()+4)
+          
+
+          if(horario.getHours()+4 >= 24){
+            horario2 = horario.getHours()+4-12;
+            hh = 'AM'
+          }
+          if (horario.getUTCHours()== 0) {
+            horario2 = 12
+          }
+
           const minutos = horario.getUTCMinutes()<10?'0' + horario.getUTCMinutes():'' + horario.getUTCMinutes();
           horario2 = horario.getUTCHours()+1 +":"+ minutos;
-        }else if(pais_nombre== 'United States' || pais_nombre=='Canada'||pais_nombre=='Mexico'){
+
+          horario3 = horario2+" "+hh
+
+        }else if(pais_nombre== 4903565 || pais_nombre==6087824||pais_nombre==3530597){
+
+          if(horario.getHours() >= 24){
+            horario2 = horario.getHours()-12;
+            hh = 'AM'
+          }
+          if (horario.getHours()== 0) {
+            horario2 = 12
+          }
+
           const minutos = horario.getMinutes()<10?'0' +horario.getMinutes(): '' + horario.getMinutes();
           horario2 = horario.getHours()-1 +":"+ minutos;
+
+          horario3 = horario2+" "+hh
+          
+        }else if(pais_nombre==3941584 || pais_nombre== 3646738 || pais_nombre== 3652462 || pais_nombre == 3688689){
+          if(horario.getHours() >= 24){
+            horario2 = horario.getHours()-12;
+            hh = 'AM'
+          }
+          if (horario.getHours()== 0) {
+            horario2 = 12
+          }
+
+          const minutos = horario.getMinutes()<10?'0' +horario.getMinutes(): '' + horario.getMinutes();
+          horario2 = horario.getHours()-2 +":"+ minutos;
+
+          horario3 = horario2+" "+hh
+        }else if (pais_nombre==3435910 ||pais_nombre==3895114 ||pais_nombre==3472339 ||pais_nombre==3441575 ||pais_nombre==3911925){
+          if(horario.getHours() >= 24){
+            horario2 = horario.getHours()-12;
+            hh = 'AM'
+          }
+          if (horario.getHours()== 0) {
+            horario2 = 12
+          }
+
+          const minutos = horario.getMinutes()<10?'0' +horario.getMinutes(): '' + horario.getMinutes();
+          horario2 = horario.getHours() +":"+ minutos;
+
+          horario3 = horario2+" "+hh
         }
-    }
+        
+      
+        if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(posicion =>{
+            
+              const url = `https://api.openweathermap.org/data/2.5/weather?id=`+pais_nombre+`&appid=44dd034ab45821216e9ebc87d6a732bd`
+            
+            fetch(url)
+              .then(response =>{return response.json()})
+              .then(data =>{
+
+                let nameValue = data['name'];
+                let weathValue = data['weather'][0]['description'];
+        
+                clima_pais = data.main.temp - 273.15
+
+                let clima_pais_redondeado = Math.round(clima_pais)+ " Cº"
+         
+        
+                
+
+                // let climaIcono = document.getElementById('icono-animado').src
+
+                // switch(data.weather[0].main){
+                //   case 'Clear':
+                //     climaIcono= '../animated/day.svg'
+                //     break;
+                //   case 'Clouds':
+                //     if (pais.carga_horaria <'19:00 PM') {
+                      
+                //       climaIcono= '../animated/cloudy-day-1.svg'
+                      
+                //       break;
+                //     }else{
+                //       document.getElementById('icono-animado').src= '../animated/cloudy-night-1.svg'
+                      
+                //       break;
+                //     }
+                //   case 'Fog':
+                    
+                //     document.getElementById('icono-animado').src='../animated/cloudy-day-1.svg'
+                //     break;
+                // }
+        
+                
+                
+                let cartasuli = document.createElement("div")
+                  cartasuli.classList = 'cartasuli';
+
+                 cartasuli.innerHTML= 
+                `
+                <div class="card">
+              <h5 class="card-title">${nameValue}</h5>
+                <img class="card-icon" id="icono-animado" src="" alt="" height="128" width="128">
+                <div class="" id="climaDescripcion">
+                </div>
+              </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item horaDescripcion">${horario3}</li>
+                  <li class="list-group-item weathDescripcion">${weathValue}</li>
+                  <li class="list-group-item climaDescripcion">${clima_pais_redondeado}</li>
+                </ul>
+                `
+                container.appendChild(cartasuli);
+                
+              })
+              .catch(error =>{
+                console.log(error)
+              })
+            
+          })
+          
+        }
+
+    },
   })
   
-  let clima_pais = await Swal.fire({
-    icon:'question',
-    title: '¿Cual es el clima actual del pais?(Ingresar con Cº)',
-    input: 'text',
-    inputLabel: '',
-    inputPlaceholder: 'Ingrese el clima del pais'
-  })
-  let coordenadas_pais = await Swal.fire({
-    icon:'question',
-    title: '¿Cuales son las coordenadas del pais?(ir a google maps y copiar con click derecho hacia el pais)',
-    input: 'text',
-    inputLabel: '',
-    inputPlaceholder: 'Ingrese las coordenadas del pais'
-  })
-    
-        
-        agregarClima(pais_nombre.value,horario2,clima_pais.value,coordenadas_pais.value)
-        
-        Swal.fire({
-          icon:'success',
-          title:'Se ha agregado el pais correctamente!'
-        })
         
 })
-
-
-
-let container= document.getElementById("carta")
-   
-array_localStorage.forEach(pais => {
-    let card = document.createElement("div")
-    card.classList = 'card';
-
-    
-         const texto_html= 
-        `<div class="cartasuli">
-        <div class="card">
-      <h5 class="card-title">${pais.nombre_pais}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">${pais.carga_horaria}</li>
-      <li class="list-group-item">${pais.clima}</li>
-      <li class="list-group-item">${pais.coordenadas}</li>
-    </ul>
-    </div>`
-    container.innerHTML += texto_html;
-    });
-
     

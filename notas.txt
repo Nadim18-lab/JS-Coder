@@ -1,0 +1,98 @@
+24 a 45= 
+// guardarLocalStorage
+// function saveInLocalStorage(paises){
+//     localStorage.setItem("pais",JSON.stringify(paises))
+// }
+
+
+// function agregarClima(pais_nombre,horario,clima_pais,coordenadas_pais){
+
+//     let pais = {
+//         nombre_pais: pais_nombre,
+//         carga_horaria:horario,
+//         clima: clima_pais,
+//         coordenadas: coordenadas_pais
+//     }
+    
+    
+//     array_localStorage.push(pais)
+    
+//     saveInLocalStorage(array_localStorage)
+    
+// }
+------------------------------------------------------------------------------------
+171=
+//agregarClima(data.name,horario3,clima_pais_redondeado,coordenadas_pais)//linea 171
+------------------------------------------------------------------------------------
+208 a 250=
+ //   let cartasuli = document.createElement("div")
+      //   cartasuli.classList = 'cartasuli';
+
+      //    cartasuli.innerHTML= 
+      //   `
+      //   <div class="card">
+      // <h5 class="card-title">${pais.nombre_pais}</h5>
+      //   <img class="card-icon" id="icono-animado" src="" alt="" height="128" width="128">
+      //   <div class="" id="climaDescripcion">
+      //   </div>
+      // </div>
+      //   <ul class="list-group list-group-flush">
+      //     <li class="list-group-item">${pais.carga_horaria}</li>
+      //     <li class="list-group-item climaDescripcion">${pais.clima}</li>
+      //     <li class="list-group-item">${pais.coordenadas}</li>
+      //   </ul>
+      //   `
+      //   container.appendChild(cartasuli);
+
+        // let climaIcono = document.getElementById('icono-animado').src
+
+        // switch(data.weather[0].main){
+        //   case 'Clear':
+        //     climaIcono= '../animated/day.svg'
+        //     break;
+        //   case 'Clouds':
+        //     if (pais.carga_horaria <'19:00 PM') {
+              
+        //       climaIcono= '../animated/cloudy-day-1.svg'
+              
+        //       break;
+        //     }else{
+        //       document.getElementById('icono-animado').src= '../animated/cloudy-night-1.svg'
+              
+        //       break;
+        //     }
+        //   case 'Fog':
+            
+        //     document.getElementById('icono-animado').src='../animated/cloudy-day-1.svg'
+        //     break;
+        // }
+----------------------------------------------------------------------------------
+194 a 221 = 
+if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(posicion =>{
+    
+    array_localStorage.forEach(pais => {
+      
+      
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${pais.nombre_pais}&appid=44dd034ab45821216e9ebc87d6a732bd`
+    
+    fetch(url)
+      .then(response => response.json())
+      .then(data =>{
+        console.log(data)
+
+     
+
+        
+
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+    
+
+    
+
+  })
+});
+}
