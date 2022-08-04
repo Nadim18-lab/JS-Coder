@@ -5,7 +5,8 @@ let tempPaisHtml = document.querySelector(".weathDescripcion")
 let weathPaisHtml = document.querySelector(".climaDescripcion")
 let horaPaisHtml = document.querySelector(".horaDescripcion")
 
-// let climaAnimado = document.getElementById('icono-animado')
+
+let climaAnimado = document.querySelector('#icono-animado')
 
 let array_localStorage =[]
 
@@ -70,7 +71,7 @@ agregarC.addEventListener("click",async()=>{
           console.log(horario.getHours()+4)
           
 
-          if(horario.getHours()+4 >= 24){
+          if(horario.getHours()+4 >= 23){
             horario2 = horario.getHours()+4-12;
             hh = 'AM'
           }
@@ -85,7 +86,7 @@ agregarC.addEventListener("click",async()=>{
 
         }else if(pais_nombre== 4903565 || pais_nombre==6087824||pais_nombre==3530597){
 
-          if(horario.getHours() >= 24){
+          if(horario.getHours() >= 23){
             horario2 = horario.getHours()-12;
             hh = 'AM'
           }
@@ -99,7 +100,7 @@ agregarC.addEventListener("click",async()=>{
           horario3 = horario2+" "+hh
           
         }else if(pais_nombre==3941584 || pais_nombre== 3646738 || pais_nombre== 3652462 || pais_nombre == 3688689){
-          if(horario.getHours() >= 24){
+          if(horario.getHours() >= 23){
             horario2 = horario.getHours()-12;
             hh = 'AM'
           }
@@ -112,7 +113,7 @@ agregarC.addEventListener("click",async()=>{
 
           horario3 = horario2+" "+hh
         }else if (pais_nombre==3435910 ||pais_nombre==3895114 ||pais_nombre==3472339 ||pais_nombre==3441575 ||pais_nombre==3911925){
-          if(horario.getHours() >= 24){
+          if(horario.getHours() >= 23){
             horario2 = horario.getHours()-12;
             hh = 'AM'
           }
@@ -138,55 +139,28 @@ agregarC.addEventListener("click",async()=>{
 
                 let nameValue = data['name'];
                 let weathValue = data['weather'][0]['description'];
-        
+                let weathIconValue = data['weather'][0]['icon']
+                const urlIcon= `https://openweathermap.org/img/wn/${weathIconValue}.png`
                 clima_pais = data.main.temp - 273.15
 
                 let clima_pais_redondeado = Math.round(clima_pais)+ " Cº"
-         
-        
-                
 
-                // let climaIcono = document.getElementById('icono-animado').src
-
-                // switch(data.weather[0].main){
-                //   case 'Clear':
-                //     climaIcono= '../animated/day.svg'
-                //     break;
-                //   case 'Clouds':
-                //     if (pais.carga_horaria <'19:00 PM') {
-                      
-                //       climaIcono= '../animated/cloudy-day-1.svg'
-                      
-                //       break;
-                //     }else{
-                //       document.getElementById('icono-animado').src= '../animated/cloudy-night-1.svg'
-                      
-                //       break;
-                //     }
-                //   case 'Fog':
-                    
-                //     document.getElementById('icono-animado').src='../animated/cloudy-day-1.svg'
-                //     break;
-                // }
-        
-                
-                
                 let cartasuli = document.createElement("div")
-                  cartasuli.classList = 'cartasuli';
+                  cartasuli.classList = 'cartasuli'
 
                  cartasuli.innerHTML= 
                 `
-                <div class="card">
-              <h5 class="card-title">${nameValue}</h5>
-                <img class="card-icon" id="icono-animado" src="" alt="" height="128" width="128">
-                <div class="" id="climaDescripcion">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">${nameValue}</h5>
+                  <img id="icono-animado" src="${urlIcon}" alt="" height="128" width="128">
                 </div>
-              </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item horaDescripcion">${horario3}</li>
                   <li class="list-group-item weathDescripcion">${weathValue}</li>
                   <li class="list-group-item climaDescripcion">${clima_pais_redondeado}</li>
                 </ul>
+              </div>
                 `
                 container.appendChild(cartasuli);
                 
