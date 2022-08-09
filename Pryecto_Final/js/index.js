@@ -138,9 +138,33 @@ agregarC.addEventListener("click",async()=>{
               .then(data =>{
 
                 let nameValue = data['name'];
+                let nameWeath = data['weather'][0]['main'];
                 let weathValue = data['weather'][0]['description'];
-                let weathIconValue = data['weather'][0]['icon']
-                const urlIcon= `https://openweathermap.org/img/wn/${weathIconValue}.png`
+                let weathIconValue = data['weather'][0]['icon'];
+                let urlIcon;
+                if (weathIconValue.includes("n")) {
+                  if(nameWeath == 'Clouds'){
+                    urlIcon= '../animated/cloudy-night-1.svg'
+                 }else if(nameWeath == 'Clear'){
+                  urlIcon='../animated/night.svg'
+                }else if(nameWeath == 'Rain'){
+                  urlIcon='../animated/rainy-1.svg'
+                }else if(nameWeath == 'Thunderstorm'){
+                  urlIcon='../animated/thunder.svg'
+                }
+                }else{
+                  if(nameWeath == 'Clouds'){
+                    urlIcon= '../animated/cloudy-day-1.svg'
+                 }else if(nameWeath == 'Clear'){
+                  urlIcon='../animated/day.svg'
+                }else if(nameWeath == 'Rain'){
+                  urlIcon='../animated/rainy-1.svg'
+                }else if(nameWeath == 'Thunderstorm'){
+                  urlIcon='../animated/thunder.svg'
+                }
+                }
+                
+                
                 clima_pais = data.main.temp - 273.15
 
                 let clima_pais_redondeado = Math.round(clima_pais)+ " Cº"
